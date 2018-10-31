@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'QA_ops',
 ]
 
 MIDDLEWARE = [
@@ -68,11 +69,16 @@ WSGI_APPLICATION = 'django_for_python3.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+#建库命令
+#CREATE DATABASE `QA_ops` /*!40100 DEFAULT CHARACTER SET utf8 */;
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+        'NAME': 'QA_ops',         # 你要存储数据的库名，事先要创建之
+        'USER': 'root',         # 数据库用户名
+        'PASSWORD': 'Love2youzu@4',     # 密码
+        'HOST': '192.168.254.128',    # 主机
+        'PORT': '3306',         # 数据库使用的端口
     }
 }
 
