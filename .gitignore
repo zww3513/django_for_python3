@@ -101,6 +101,7 @@ venv.bak/
 /site
 
 # mypy
+django_for_python3/settings.py
 .mypy_cache/
 .idea/
 django_for_python3/settings.py
