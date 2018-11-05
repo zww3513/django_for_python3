@@ -8,7 +8,7 @@ def index(request):
     context = {}
     context['hello'] = "hello,张伟伟！"
     context['date'] = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-    return render(request, 'hello.html', context)
+    return render(request, 'index.html', context)
 def command(request):
     request.encoding = 'utf-8'
     info="serverIp="+request.GET['serverIp']+"<br>"
