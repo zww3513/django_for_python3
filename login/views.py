@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from . import models
 from .forms import UserForm
 from .forms import RegisterForm
+from django.http import JsonResponse
+from captcha.models import CaptchaStore
+
 # Create your views here.
 def index(request):
     pass
@@ -78,3 +81,29 @@ def logout(request):
     request.session.flush()
     return redirect("/index/")
 
+##定义验证码是否输入正确的接口
+def ajax_val(request):
+    if request.is_ajax():
+        cs = CaptchaStore.objects.filter(response=request.GET['response'],hashkey=request.GET['hashkey'])
+        if cs:
+            json_data = {'status': 1}
+        else:
+            json_data = {'status': 0}
+        return JsonResponse(json_data)
+    else:
+        #raise Http404
+        json_data = {'status': 0}
+        return JsonResponse(json_data)
+
+##定义刷新验证码接口
+def captcha_refresh(request):
+    """  Return json with new captcha for ajax refresh request """
+    if not request.is_ajax():
+    # 只接受ajax提交
+        raise Http404
+    new_key = CaptchaStore.generate_key()
+    to_json_response = {
+        'key': new_key,
+        'image_url': captcha_image_url(new_key),
+    }
+    return HttpResponse(json.dumps(to_json_response), content_type='application/json')

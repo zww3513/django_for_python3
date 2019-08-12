@@ -26,5 +26,8 @@ urlpatterns = [
     path(r'login/', login_views.login),
     path(r'register/', login_views.register),
     path(r'logout/', login_views.logout),
-    path(r'captcha/', include('captcha.urls'))
+    path(r'captcha/', include('captcha.urls')),
+    path(r'ajax_val/', login_views.ajax_val, name='ajax_val'),
+    path(r'refresh/', login_views.captcha_refresh, name='captcha-refresh'),
+
 ]
